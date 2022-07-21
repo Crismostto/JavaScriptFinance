@@ -27,6 +27,18 @@
 
 
 /*
+* Sector body de Cartas.
+*/
+.my-custom-scrollbar {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+
+/*
 Bootstrap Templates.
 */
 .bd-placeholder-img {

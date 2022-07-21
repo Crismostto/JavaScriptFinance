@@ -18,7 +18,6 @@ class Gasto {
 }
 
 
-
 /**  
 *  Funciones.
 **/ 
@@ -55,7 +54,7 @@ function generarIngresoGasto(tipo, nombre, monto, fecha){
 
 }
 
-
+//Se genera un la interfaz o gasto. 
 function mostrarIngresosGastos(tipo,array){
 
     
@@ -121,6 +120,10 @@ function calcularBalanceGeneral(){
    balanceGeneralRef.textContent= total;
 }
 
+
+
+
+
 /*Begin*/
 const TodosIngresos= JSON.parse( localStorage.getItem("Ingresos")) || [];
 const TodosGastos= JSON.parse( localStorage.getItem("Gastos")) || [];
@@ -177,3 +180,29 @@ btnGasto.addEventListener('click', function(){
     //Finalizada la carga se calcula el balance general
     calcularBalanceGeneral();
 });
+
+
+/** 
+* Seccion consumo API cotizaciones del dolar.
+**/ 
+
+    fetch('https://api-dolar-argentina.herokuapp.com/api/dolaroficial', {
+        method:'GET',
+        headers: { 'Content-type': 'application/json'},
+        mode: 'no-cors'
+    })
+    .then((res) => res.json())
+    .then ((data) => {
+        console.log(data)
+    })    
+
+
+
+
+
+
+//  let monedas = document.getElementById("mostrarCotizaciones");
+//  monedas.addEventListener('click', function(){
+//       console.log('entramos')
+
+//  } )
