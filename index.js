@@ -23,6 +23,15 @@ class Gasto {
 **/ 
 
 
+/*Busca datos a la API de dolar*/
+async function getDolar() {
+    const apiUSD = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
+    const cotizacionDolar = await fetch(apiUSD);
+    const cotizacionJSON = await cotizacionDolar.json();
+    return cotizacionJSON
+    
+  }
+
 /*Carga del local storage al principio en la vista de tablas*/
 window.addEventListener("load", () => {
   if (TodosIngresos.length > 0) {
@@ -186,23 +195,30 @@ btnGasto.addEventListener('click', function(){
 * Seccion consumo API cotizaciones del dolar.
 **/ 
 
-    fetch('https://api-dolar-argentina.herokuapp.com/api/dolaroficial', {
-        method:'GET',
-        headers: { 'Content-type': 'application/json'},
-        mode: 'no-cors'
-    })
-    .then((res) => res.json())
-    .then ((data) => {
-        console.log(data)
-    })    
+/*NO ME FUNCIONA NO SE POR QUÉ */
+// urlDolar= 'https://cors-solucion.herokuapp.com/https://api-dolar-argentina.herokuapp.com/api/dolarblue';
+ let lista = document.getElementById("listadoUsd");
+ let monedas = document.getElementById("mostrarCotizaciones");
+ monedas.addEventListener('click', async ()=>{
+    
+        try {
+            const dolar= await getDolar()
+            console.log(dolar);
+            dolar.forEach(e => {
+                const li = document.createElement('li')
+                li.innerHTML = `
+                                <h4>${e.casa.nombre}</h4>
+                                <p>Compra: ${e.casa.compra}</p>
+                                <p>Venta: ${e.casa.venta}</p>
+                              `
+                lista.append(li);              
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    
+        
+ } )
 
 
 
-
-
-
-//  let monedas = document.getElementById("mostrarCotizaciones");
-//  monedas.addEventListener('click', function(){
-//       console.log('entramos')
-
-//  } )
